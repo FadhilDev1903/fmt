@@ -1,0 +1,18 @@
+RewriteEngine On
+RewriteBase /royaloak/
+
+# Redirect Trailing Slashes...
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Handle Front Controller...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
+
+# Ensure requests are forwarded to the public directory
+RewriteRule ^$ public/index.php [L]
+RewriteRule ^(.*)$ public/$1 [L]
+<Files 403.shtml>
+    Order allow,deny
+    Allow from all
+</Files>
