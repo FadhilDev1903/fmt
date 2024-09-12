@@ -36,6 +36,8 @@ Route::post('/register-next', [App\Http\Controllers\RegisterController::class, '
 Route::get('/reload-captcha', [App\Http\Controllers\CaptchaController::class, 'reloadCaptcha'])->name('reload_captcha');
 
 Route::get('/home', [App\Http\Controllers\HomeUserController::class, 'index'])->name('home_user')->middleware('auth', 'check.user', 'verified');
+Route::get('/table-collection', [App\Http\Controllers\HomeUserController::class, 'getTableCollection'])->name('getTableCollection')->middleware('auth', 'check.user', 'verified');
+Route::get('/table-collection-detail/{id}', [App\Http\Controllers\HomeUserController::class, 'getTableCollectionDetail'])->name('getTableCollectionDetail')->middleware('auth', 'check.user', 'verified');
 
 Route::controller(ProfileUserController::class)->group(function () {
     Route::get('profile', 'index')->name('profile')->middleware('auth', 'check.user', 'verified');

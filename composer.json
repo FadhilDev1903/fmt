@@ -18,7 +18,8 @@
         "league/iso3166": "^4.3",
         "mews/captcha": "^3.3",
         "phpoffice/phpspreadsheet": "^2.0",
-        "yajra/laravel-datatables-oracle": "^10.11"
+        "yajra/laravel-datatables-oracle": "^10.11",
+        "intervention/image": "2.5.0"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^2.0",

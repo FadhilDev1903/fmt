@@ -181,6 +181,7 @@ return [
         yajra\Datatables\DatatablesServiceProvider::class,
 
         Mews\Captcha\CaptchaServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
