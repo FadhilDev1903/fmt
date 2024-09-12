@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Collection;
 use App\Models\shoplistchange;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -55,5 +56,10 @@ class Shoplist extends Model
     public function detailchange(): HasOne
     {
         return $this->hasOne(shoplistchange::class, 'id_shoplist', 'id');
+    }
+
+    public function collection()
+    {
+        return $this->hasOne(Collection::class, 'gsnr', 'gsnr');
     }
 }

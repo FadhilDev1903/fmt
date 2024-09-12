@@ -36,16 +36,6 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="periode_num">Periode Number</label>
-                                        <select class="form-control select2" style="width: 100%;" id="periode_num" name="periode_num">
-                                            <option></option>
-                                            @foreach ($periodeShoplist as $s)
-                                                <option value="{{ $s->periodeshoplist_name }}">
-                                                    {{ $s->periodeshoplist_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="your_task">Select Your Task Report</label>
                                         <select class="form-control select2" style="width: 100%;" id="your_task" name="your_task">
                                             <option></option>
@@ -63,6 +53,16 @@
                                                 <option value="collection">Data Collection</option>
                                                 <option value="servicing">Panel Servicing</option>
                                                 <option value="recruitment">Panel Recruitment</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="periode_num">Periode Number</label>
+                                            <select class="form-control select2" style="width: 100%;" id="periode_num" name="periode_num">
+                                                <option></option>
+                                                @foreach ($periodeShoplist as $s)
+                                                    <option value="{{ $s->periodeshoplist_name }}">
+                                                        {{ $s->periodeshoplist_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

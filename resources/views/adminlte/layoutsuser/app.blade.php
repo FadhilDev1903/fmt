@@ -1894,147 +1894,148 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             name: 'approved_status'
                         },
                         @if (auth()->user()->status == 'spv' || auth()->user()->status == 'adm')
-                        {
-                            data: 'action',
-                            name: 'action'
-                        }@endif
+                            {
+                                data: 'action',
+                                name: 'action'
+                            }
+                        @endif
                     ]
                 });
             });
 
             $(document).on('click', '.btn-approve-event', function() {
-                    var eventId = $(this).data('expense-id');
-                    var event = [];
-                    event.push(eventId);
-                    $.ajax({
-                        url: '{{ route('event_approve') }}',
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            event_id: event
-                        },
-                        success: function(response) {
-                            Toast.fire({
-                                icon: 'success',
-                                title: response.message
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        },
-                        error: function(xhr, status, error) {
-                            Toast.fire({
-                                icon: 'error',
-                                title: 'Harap ulangi kembali!'
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        }
-                    });
+                var eventId = $(this).data('expense-id');
+                var event = [];
+                event.push(eventId);
+                $.ajax({
+                    url: '{{ route('event_approve') }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        event_id: event
+                    },
+                    success: function(response) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Harap ulangi kembali!'
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    }
                 });
+            });
 
-                // Lakukan operasi reject pada expense tertentu
-                $(document).on('click', '.btn-reject-event', function() {
-                    var eventId = $(this).data('expense-id');
-                    var event = [];
-                    event.push(eventId);
-                    $.ajax({
-                        url: '{{ route('event_reject') }}',
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            event_id: event
-                        },
-                        success: function(response) {
-                            Toast.fire({
-                                icon: 'success',
-                                title: response.message
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        },
-                        error: function(xhr, status, error) {
-                            Toast.fire({
-                                icon: 'error',
-                                title: 'Harap ulangi kembali!'
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        }
-                    });
+            // Lakukan operasi reject pada expense tertentu
+            $(document).on('click', '.btn-reject-event', function() {
+                var eventId = $(this).data('expense-id');
+                var event = [];
+                event.push(eventId);
+                $.ajax({
+                    url: '{{ route('event_reject') }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        event_id: event
+                    },
+                    success: function(response) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Harap ulangi kembali!'
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    }
                 });
+            });
 
-                // Lakukan operasi approve all expenses yang dipilih
-                $('#btn-approve-all-event').on('click', function() {
-                    var allEvent = []; // Simpan semua ID expense yang ada
-                    $('input.checkbox-row:checked').each(function() {
-                        allEvent.push($(this).val());
-                    });
-                    $.ajax({
-                        url: '{{ route('event_approve') }}',
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            event_id: allEvent
-                        },
-                        success: function(response) {
-                            Toast.fire({
-                                icon: 'success',
-                                title: response.message
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        },
-                        error: function(xhr, status, error) {
-                            Toast.fire({
-                                icon: 'error',
-                                title: 'Harap ulangi kembali!'
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        }
-                    });
+            // Lakukan operasi approve all expenses yang dipilih
+            $('#btn-approve-all-event').on('click', function() {
+                var allEvent = []; // Simpan semua ID expense yang ada
+                $('input.checkbox-row:checked').each(function() {
+                    allEvent.push($(this).val());
                 });
+                $.ajax({
+                    url: '{{ route('event_approve') }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        event_id: allEvent
+                    },
+                    success: function(response) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Harap ulangi kembali!'
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    }
+                });
+            });
 
-                // Lakukan operasi reject all expenses yang dipilih
-                $('#btn-reject-all-event').on('click', function() {
-                    var allEvents = []; // Simpan semua ID expense yang ada
-                    $('input.checkbox-row:checked').each(function() {
-                        allEvents.push($(this).val());
-                    });
-                    console.log(allEvents);
-                    $.ajax({
-                        url: '{{ route('event_reject') }}',
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            event_id: allEvents
-                        },
-                        success: function(response) {
-                            Toast.fire({
-                                icon: 'success',
-                                title: response.message
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        },
-                        error: function(xhr, status, error) {
-                            Toast.fire({
-                                icon: 'error',
-                                title: 'Harap ulangi kembali!'
-                            }).then(function() {
-                                $("#dataTimesheetExpenses").DataTable().ajax.reload();
-                            });
-                        }
-                    });
+            // Lakukan operasi reject all expenses yang dipilih
+            $('#btn-reject-all-event').on('click', function() {
+                var allEvents = []; // Simpan semua ID expense yang ada
+                $('input.checkbox-row:checked').each(function() {
+                    allEvents.push($(this).val());
                 });
+                console.log(allEvents);
+                $.ajax({
+                    url: '{{ route('event_reject') }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        event_id: allEvents
+                    },
+                    success: function(response) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Harap ulangi kembali!'
+                        }).then(function() {
+                            $("#dataTimesheetExpenses").DataTable().ajax.reload();
+                        });
+                    }
+                });
+            });
         </script>
         {{-- akhir my expense --}}
         {{-- timesheet --}}
@@ -2525,27 +2526,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $("#todo").show();
                     $("#finance").hide();
                     $("#expenses").hide();
-                    $("#reportfinance").val('');
-                    $("#reportexpenses").val('');
+                    $("#reportfinance").val('').trigger('change');
+                    $("#reportexpenses").val('').trigger('change');
+                    $("#periode_num").val('').trigger('change');
                 } else if (this.value == "project") {
                     $("#todo").hide();
                     $("#finance").hide();
                     $("#expenses").hide();
-                    $("#reportfinance").val('');
-                    $("#reportexpenses").val('');
-                    $("#reporttodo").val('');
+                    $("#reportfinance").val('').trigger('change');
+                    $("#reportexpenses").val('').trigger('change');
+                    $("#reporttodo").val('').trigger('change');
+                    $("#periode_num").val('').trigger('change');
                 } else if (this.value == "expenses") {
                     $("#todo").hide();
                     $("#finance").hide();
                     $("#expenses").show();
-                    $("#reportfinance").val('');
-                    $("#reporttodo").val('');
+                    $("#reportfinance").val('').trigger('change');
+                    $("#reporttodo").val('').trigger('change');
+                    $("#periode_num").val('').trigger('change');
                 } else {
                     $("#todo").hide();
                     $("#finance").show();
                     $("#expenses").hide();
-                    $("#reportexpenses").val('');
-                    $("#reporttodo").val('');
+                    $("#reportexpenses").val('').trigger('change');
+                    $("#reporttodo").val('').trigger('change');
+                    $("#periode_num").val('').trigger('change');
                 }
             });
         </script>
@@ -2806,6 +2811,129 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     }
                 });
             });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                list_collection();
+                collectionDetail();
+            });
+
+            function list_collection() {
+                var datacollection = $('#data-collection').DataTable({
+
+                    processing: true,
+                    serverSide: true,
+                    "bDestroy": true,
+                    searching: false,
+                    ajax: {
+                        url: "{{ route('getTableCollection') }}",
+                        data: function(d) {
+                            d.city = $('#city').val()
+                            d.region = $('#region').val()
+                            d.spv = $('#spv').val()
+                        },
+                    },
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            searchable: false,
+                            orderable: false,
+                            name: 'DT_RowIndex',
+                            className: "text-center"
+                        },
+                        @if (auth()->user()->status == 'adm' || auth()->user()->status == 'spv')
+                            {
+                                data: 'collection_staffname',
+                                name: 'collection_staffname',
+                                className: "text-center"
+                            },
+                        @endif {
+                            data: 'periode_name',
+                            name: 'periode_name',
+                            className: "text-center"
+                        },
+                        {
+                            data: 'nameofshop',
+                            name: 'nameofshop',
+                        },
+                        {
+                            data: 'collection_status',
+                            name: 'collection_status'
+                        },
+                        @if (auth()->user()->status == 'adm' || auth()->user()->status == 'spv')
+                            {
+                                data: 'action',
+                                name: 'action',
+                                className: "text-center"
+                            }
+                        @endif
+                    ]
+                });
+                $("#city").change(function(e) {
+                    e.preventDefault();
+                    datacollection.draw();
+                });
+                $("#region").change(function(e) {
+                    e.preventDefault();
+                    datacollection.draw();
+                });
+                $("#spv").change(function(e) {
+                    e.preventDefault();
+                    datacollection.draw();
+                });
+                return datacollection;
+            }
+
+            function collectionDetail() {
+
+                $(document).on('click', '.btnShowCollection', function(e) {
+                    e.preventDefault();
+                    let id = $(this).data('id');
+                    var url = "{{ route('getTableCollectionDetail', 'id') }}";
+                    url = url.replace('id', id);
+                    var datacollectiondetail = $('#data-collection-detail').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        "bDestroy": true,
+                        searching: false,
+                        ajax: {
+                            url: url,
+                        },
+                        columns: [{
+                                data: 'DT_RowIndex',
+                                searchable: false,
+                                orderable: false,
+                                name: 'DT_RowIndex',
+                                className: "text-center"
+                            },
+                            {
+                                data: 'collection_staffname',
+                                name: 'collection_staffname',
+                                className: "text-center"
+                            },
+                            {
+                                data: 'periode_name',
+                                name: 'periode_name',
+                                className: "text-center"
+                            },
+                            {
+                                data: 'nameofshop',
+                                name: 'nameofshop',
+                            },
+                            {
+                                data: 'collection_status',
+                                name: 'collection_status'
+                            },
+                            {
+                                data: 'reason',
+                                name: 'reason'
+                            }
+                        ]
+                    });
+                    return datacollectiondetail;
+
+                });
+            }
         </script>
         {{-- akhir kumpulan function --}}
 </body>

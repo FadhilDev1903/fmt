@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Shoplist;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Collection extends Model
 {
@@ -27,4 +28,9 @@ class Collection extends Model
         'collection_long',
         'country'
     ];
+
+    public function shoplist()
+    {
+        return $this->hasOne(Shoplist::class, 'gsnr', 'gsnr');
+    }
 }
