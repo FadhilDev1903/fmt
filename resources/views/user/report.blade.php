@@ -42,7 +42,7 @@
                                             <option value="todo">Report Todo</option>
                                             <option value="project">Project</option>
                                             <option value="expenses">Expenses</option>
-                                            <option value="finance">Finance</option>
+                                            {{-- <option value="finance">Finance</option> --}}
                                         </select>
                                     </div>
                                     <div id="todo" style="display: none;">
@@ -68,8 +68,17 @@
                                     </div>
                                     <div id="expenses" style="display: none;">
                                         <div class="form-group">
-                                            <label for="reportexpenses">Select Your Report Batch</label>
+                                            <label for="reportexpenses">Select Your Report Expanse</label>
                                             <select class="form-control select2" style="width: 100%;" id="reportexpenses" name="reportexpenses">
+                                                <option></option>
+                                                <option value="journal">Report Journal</option>
+                                                <option value="tobank">Report To Bank</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="reportbatch">Select Your Report Batch</label>
+                                            <select class="form-control select2" style="width: 100%;" id="reportbatch" name="reportbatch">
                                                 <option></option>
                                                 <option value="batch1">Batch 1</option>
                                                 <option value="batch2">Batch 2</option>

@@ -58,10 +58,15 @@ class HomeUserController extends Controller
     {
         if ($request->ajax()) {
             if (auth()->user()->status == 'col') {
-                $data = Collection::with(['shoplist'])
-                    ->where('collection_status', 'collected')
-                    ->where('collection_staffname', auth()->user()->name)
-                    ->orderBy('id', 'desc');
+                // $data = Collection::with(['shoplist'])
+                //     ->where('collection_status', 'collected')
+                //     ->where('collection_staffname', auth()->user()->name)
+                //     ->orderBy('id', 'desc');
+                $data = Collection::join('shoplists', 'collections.gsnr', '=', 'shoplists.gsnr')
+                ->where('collection_status', 'collected')
+                    ->where('collections.collection_staffname', auth()->user()->name)
+                    ->select('collections.id as id', 'collections.collection_status as collection_status', 'collections.periode_name as periode_name', 'collections.collection_staffname as collection_staffname', 'nameofshop', 'collections.gsnr as gsnr', 'city', 'region', 'shoplists.country', 'spv')
+                    ->orderBy('collections.id', 'desc');
             } elseif (auth()->user()->status == 'adm') {
                 $data = Collection::join('shoplists', 'collections.gsnr', '=', 'shoplists.gsnr')
                     ->where('collections.country', auth()->user()->country)

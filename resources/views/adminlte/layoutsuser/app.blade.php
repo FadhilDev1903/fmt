@@ -1482,7 +1482,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     scrollX: true,
                     ajax: '{{ route('my_expense_all') }}',
                     columns: [
-                        @if (session('status_user') == 'Supervisor' || session('status_user') == 'Administrator')
+                        @if (auth()->user()->status == 'adm' || auth()->user()->status == 'spv')
                             {
                                 // Column for Action buttons
                                 data: null,
@@ -1499,12 +1499,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             width: '20px',
                             orderable: false,
                         },
-                        {
-                            data: 'employee_name',
-                            name: 'employee_name',
-                            width: '100px'
-                        },
-                        {
+                        @if (auth()->user()->status == 'adm' || auth()->user()->status == 'spv')
+                            {
+                                data: 'employee_name',
+                                name: 'employee_name',
+                                width: '100px'
+                            },
+                        @endif {
                             data: 'claim_date',
                             name: 'claim_date',
                             width: '100px'
@@ -1545,7 +1546,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             orderable: false,
                             searchable: false,
                             render: function(data, type, full, meta) {
-                                return '<a href="{{ asset('assets / img ') }}/' +
+                                return '<a href="{{ asset('assets/img') }}/' +
                                     data.image +
                                     '" data-toggle="lightbox" data-title="Bukti" data-gallery="gallery">Show</a>';
                             },

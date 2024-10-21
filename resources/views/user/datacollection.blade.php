@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <label for="gsnr_id">GSNR ID</label>
                                         <input type="text" class="form-control @error('gsnr_id') is-invalid @enderror"
-                                            name="gsnr_id" id="gsnr_id" placeholder="GSNR ID">
+                                            name="gsnr_id" id="gsnr_id" placeholder="GSNR ID" required>
                                         @error('gsnr_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -139,7 +139,7 @@
                                         <div class="custom-file">
                                             <input type="file" name="file"
                                                 class="custom-file-input @error('file') is-invalid @enderror"
-                                                id="exampleInputFile">
+                                                id="exampleInputFile" required>
                                             <label class="custom-file-label" for="exampleInputFile">Choose
                                                 file</label>
                                             @error('file')

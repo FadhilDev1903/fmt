@@ -62,7 +62,7 @@ class PanelRecruitmentUserController extends Controller
     {
         // Validasi form
         $validator = Validator::make($request->all(), [
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:100', // Validasi untuk gambar dengan maksimal ukuran 100KB
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif', // Validasi untuk gambar dengan maksimal ukuran 100KB
             'periode_num' => 'required',
             'shop_name' => 'required',
             'shop_type' => 'required',
@@ -83,7 +83,12 @@ class PanelRecruitmentUserController extends Controller
             // Buat nama file acak dengan ekstensi yang sesuai
             $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
             // Pindahkan file foto ke direktori yang ditentukan dengan nama yang diacak
-            $file->move(public_path('assets/img'), $fileName);
+            $w = Image::make($file)->width();
+            $h = Image::make($file)->height();
+            Image::make($file)
+                ->resize($w / 3, $h / 3)
+                ->save('assets/img/' . $fileName, 10);
+            // $file->move(public_path('assets/img'), $fileName);
         } else {
             return back()->with('error', 'No file uploaded.');
         }

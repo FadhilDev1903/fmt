@@ -50,7 +50,9 @@
                                     width="100%" style="display: table!important;font-size: 14px;">
                                     <thead class="bg-orange" style="color: white!important;" width="100%">
                                         <tr>
-                                            <th><input type="checkbox" id="check_all"></th>
+                                            @if (auth()->user()->status == 'spv' || auth()->user()->status == 'adm')
+                                                <th><input type="checkbox" id="check_all"></th>
+                                            @endif
                                             <th>No.</th>
                                             @if (auth()->user()->status == 'spv' || auth()->user()->status == 'adm')
                                                 <th>Employee Name</th>
@@ -127,7 +129,7 @@
                                             <th>Bank Name</th>
                                             <th>Account Bank</th>
                                             <th>Total</th>
-                                                <th>Status</th>
+                                            <th>Status</th>
                                             @if (auth()->user()->status == 'spv' || auth()->user()->status == 'adm')
                                                 <th>Action</th>
                                             @endif

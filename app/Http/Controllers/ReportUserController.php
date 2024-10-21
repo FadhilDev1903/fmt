@@ -55,11 +55,11 @@ class ReportUserController extends Controller
         } elseif ($request->reporttodo == 'servicing') {
             $this->servicing($data);
         } elseif ($request->reporttodo == 'recruitment') {
-            // $this->dataQC($data);
             $this->recruitment($data);
-        } elseif ($segmen == '4') {
-            // $this->dataYanmen($id);
-            $this->recruitment($id);
+        } elseif ($request->reportexpenses == 'journal') {
+            $this->journal($data);
+        }elseif($request->reportexpenses == 'tobank'){
+            $this->tobank($data);
         }
     }
 
@@ -137,6 +137,54 @@ class ReportUserController extends Controller
             }
         }
 
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'Report Recruitment';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+    }
+
+    public function journal($data)
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // $values = Panelrecruit::where('periode_name', $data['periode_num'])->get();
+        $styleBoldUnderline = [
+            'font' => [
+                'bold' => true,
+                'underline' => true
+            ],
+        ];
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'PT. GfK INDONESIA');
+        $sheet->setCellValue('A3', 'PART-TIME STAFF SALARY REPORT');
+        $sheet->getStyle('A1')->applyFromArray($styleBoldUnderline);
+        $sheet->getStyle('A3')->applyFromArray($styleBoldUnderline);
+        // $column = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+        // $header = ['shop_name', 'period_name', 'shop_type', 'shop_size', 'shop_address', 'shop_city', 'status', 'reason', 'startload', 'staffname', 'imgpath', 'lat', 'long', 'country'];
+        // $col = ['shopname', 'periode_name', 'shoptype', 'shopsize', 'address', 'city', 'status', 'reason', 'startload', 'staffname', 'image', 'lat', 'long', 'country'];
+        // foreach ($column as $key => $value) {
+        //     $sheet->setCellValue($value . '1', $header[$key]);
+        // }
+
+        // foreach ($values as $key => $value) {
+        //     foreach ($column as $key2 => $value2) {
+        //         $sheet->setCellValue($value2.($key+2), $value[$col[$key2]]);
+        //     }
+        // }
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'Report Part-Times Claims Salary Journal';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+    }
+
+    public function tobank($data)
+    {
         $writer = new Xlsx($spreadsheet);
         $filename = 'Report Recruitment';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

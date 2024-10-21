@@ -98,7 +98,7 @@
                                         <div class="custom-file">
                                             <input type="file" name="file"
                                                 class="custom-file-input @error('file') is-invalid @enderror"
-                                                id="exampleInputFile">
+                                                id="exampleInputFile" required>
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                             @error('file')
                                                 <span class="invalid-feedback" role="alert">
