@@ -32,7 +32,7 @@ class ShopDetailChangeController extends Controller
         $spv = Shoplist::select('spv')->where('country', session('country_user'))->distinct()->get();
         $collector = Shoplist::select('data_collector')->where('country', session('country_user'))->distinct()->get();
         $data = [
-            'title' => 'Shoplist Change Detail',
+            'title' => 'Shoplist Detail Changes',
             'menu' => $menu,
             'project' => $project,
             'channel' => $channel,
