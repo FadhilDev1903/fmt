@@ -44,13 +44,13 @@ class ProfileUserController extends Controller
         // Validasi form
         $validator = Validator::make($request->all(), [
             'idcardnumber' => 'min:16|max:16',
-            'idcardfile' => 'image|mimes:jpeg,png,jpg,gif|max:100', // Validasi untuk gambar dengan maksimal ukuran 100KB
+            'idcardfile' => 'image|mimes:jpeg,png,jpg,gif|max:10000', // Validasi untuk gambar dengan maksimal ukuran 10000KB
             'taxcardnumber' => 'min:15|max:16',
-            'taxcardfile' => 'image|mimes:jpeg,png,jpg,gif|max:100',
+            'taxcardfile' => 'image|mimes:jpeg,png,jpg,gif|max:10000',
             'beneficiarybankcode' => 'max:12',
             'beneficiaryaccountnumber' => 'max:20',
-            'coverbookbankfile' => 'image|mimes:jpeg,png,jpg,gif|max:100',
-            'familycardfile' => 'image|mimes:jpeg,png,jpg,gif|max:100'
+            'coverbookbankfile' => 'image|mimes:jpeg,png,jpg,gif|max:10000',
+            'familycardfile' => 'image|mimes:jpeg,png,jpg,gif|max:10000'
         ]);
         // [
         //     'idcardnumber.required' => 'ID Card Number required.',
